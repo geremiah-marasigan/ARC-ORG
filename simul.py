@@ -13,7 +13,7 @@ def bin_check(inp):
         if(inp[0] is "."):
             return False
     else:
-        if(inp[1] is "."):
+        if(inp[0] is "."):
             return False
 
     return all(x in binaryChar for x in inp)
@@ -60,5 +60,27 @@ print("Input is " + binary_input + " x 2^" + str(exp))
 
 stdBin = standardizeBin(binary_input)
 print("Standardized Input is " + stdBin + " x 2^" + str(stdexp))
+
+ePrime = stdexp + 1023
+
+
+
+if(signBit is 0):
+    floatingBits = stdBin[2:]
+else:
+    floatingBits = stdBin[3:]
+
+ePrime = "{0:011b}".format(ePrime)
+    
+while(len(floatingBits) < 52):
+    floatingBits = floatingBits + "0"
+
+print("Sign Bit: " + str(signBit))
+print("Eprime: " + ePrime)
+print("F: " + floatingBits)
+
+final = hex(int(str(signBit) + str(ePrime) + floatingBits, 2))
+
+print("Hex: " + final)
 
 
