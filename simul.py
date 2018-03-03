@@ -1,5 +1,3 @@
-import re
-
 print("==========IEEE-754 Binary-64 floating point converter==========")
 binaryChar = "10."
 
@@ -7,7 +5,7 @@ binaryChar = "10."
 def bin_check(inp):
     if(inp.count(".") > 1):
         return False
-        
+    
     return all(x in binaryChar for x in inp)
 
 while True:
