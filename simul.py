@@ -1,21 +1,35 @@
 print("==========IEEE-754 Binary-64 floating point converter==========")
-binaryChar = "10."
+binaryChar = "10.-"
 stdexp = 0
-
+signBit = 0
 # CHECK IF VALID BINARY INPUT #
 def bin_check(inp):
-    if(inp.count(".") > 1 or inp[0] is "."):
+    global signBit
+    if(inp.count(".") > 1 or inp.count("-") > 1 or "-" in inp and inp[0] is not "-"):
         return False
     
+    if(inp[0] is "-"):
+        signBit = 1
+        if(inp[0] is "."):
+            return False
+    else:
+        if(inp[1] is "."):
+            return False
+
     return all(x in binaryChar for x in inp)
     
 def standardizeBin(binput):
     global stdexp
     stdexp = exp
+    
+    first = 0
+    if(signBit is 1):
+        first = 1
+    
     while True:
-        if(binput[0] is "1" and binput[1] is "."):
+        if(binput[first] is "1" and binput[first+1] is "."):
             return binput
-        elif(binput[0] is "0"):
+        elif(binput[first] is "0"):
             binput = str(float(binput) * 10)
             print(binput)
             stdexp = stdexp-1
@@ -46,4 +60,5 @@ print("Input is " + binary_input + " x 2^" + str(exp))
 
 stdBin = standardizeBin(binary_input)
 print("Standardized Input is " + stdBin + " x 2^" + str(stdexp))
+
 
