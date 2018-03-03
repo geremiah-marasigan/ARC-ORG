@@ -18,3 +18,9 @@ while True:
 
 
 
+while True:
+    try:
+        exp = int(input("Input exponent base-2: "))
+        break
+    except ValueError:
+        print("ERROR: INVALID INPUT. TRY AGAIN")
