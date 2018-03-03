@@ -18,11 +18,11 @@ def standardizeBin(binput):
         elif(binput[0] is "0"):
             binput = str(float(binput) * 10)
             print(binput)
-            stdexp = stdexp+1
+            stdexp = stdexp-1
         else:
             binput = str(float(binput) * 0.1)
             print(binput)
-            stdexp = stdexp-1
+            stdexp = stdexp+1
             
             
 while True:
