@@ -29,6 +29,8 @@ def standardizeBin(binput):
     while True:
         if(binput[first] is "1" and binput[first+1] is "."):
             return binput
+        elif ("1" not in binput):
+            return "0.0"
         elif(binput[first] is "0"):
             binput = str(float(binput) * 10)
             print(binput)
@@ -61,14 +63,20 @@ print("Input is " + binary_input + " x 2^" + str(exp))
 stdBin = standardizeBin(binary_input)
 print("Standardized Input is " + stdBin + " x 2^" + str(stdexp))
 
-ePrime = stdexp + 1023
-
-
+if ("1" not in stdBin or stdexp < -1022):
+    ePrime = 0
+elif (stdexp > 1023 and "0" not in stdBin):
+    ePrime = 2047
+else:
+    ePrime = stdexp + 1023
 
 if(signBit is 0):
     floatingBits = stdBin[2:]
 else:
     floatingBits = stdBin[3:]
+
+if(ePrime is 2047):
+    floatingBits = "0"
 
 ePrime = "{0:011b}".format(ePrime)
     
@@ -79,7 +87,7 @@ print("Sign Bit: " + str(signBit))
 print("Eprime: " + ePrime)
 print("F: " + floatingBits)
 
-final = hex(int(str(signBit) + str(ePrime) + floatingBits, 2))
+final = hex(int(str(signBit) + str(ePrime) + floatingBits))
 
 print("Hex: " + final)
 
