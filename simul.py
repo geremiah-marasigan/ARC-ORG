@@ -63,7 +63,13 @@ while True:
     except ValueError:
         print("ERROR: INVALID INPUT. TRY AGAIN")
 
+# ADDS .0 IF THERE'S NO .
+if binary_input.count(".") is 0:
+    binary_input += ".0"
+
 print("Input is " + binary_input + " x 2^" + str(exp))        
+
+
 
 stdBin = standardizeBin(binary_input)
 if len(stdBin) > len(binary_input):
