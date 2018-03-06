@@ -68,33 +68,41 @@ print("Input is " + binary_input + " x 2^" + str(exp))
 stdBin = standardizeBin(binary_input)
 print("Standardized Input is " + stdBin + " x 2^" + str(stdexp))
 
-# FIND E-PRIME
-# CASE: 0 & DENORMALIZED
-if ("1" not in stdBin or stdexp < -1022):
+# CONSIDER SPECIAL CASES
+# CASE: 0
+if "1" not in stdBin:
     ePrime = 0
+    floatingBits = "0"
 # CASE: INFINITY
-elif (stdexp > 1023 and "0" not in stdBin):
+elif stdexp > 1023 and "0" not in stdBin:
     ePrime = 2047
+    floatingBits = "0"
+# CASE: DENORMALIZED
+elif stdexp < -1022:
+    ePrime = 0
+    while stdexp < -1022:
+        stdBin = str(float(stdBin) * 0.1)
+        stdexp += 1
+    if signBit is 0:
+        floatingBits = stdBin[2:]
+    else:
+        floatingBits = stdBin[3:]
 # NORMAL CASE
 else:
     ePrime = stdexp + 1023
-
-# FIND F
-if signBit is 0:
-    floatingBits = stdBin[2:]
-else:
-    floatingBits = stdBin[3:]
-
-# CASE: INFINITY
-if ePrime is 2047:
-    floatingBits = "0"
+    if signBit is 0:
+        floatingBits = stdBin[2:]
+    else:
+        floatingBits = stdBin[3:]
 
 # CONVERTS E-PRIME TO A 11 DIGIT BINARY STRING
 ePrime = "{0:011b}".format(ePrime)
 
-# ADDS TRAILING 0s
+# ADDS TRAILING 0s, REMOVES EXCESS 0s
 while(len(floatingBits) < 52):
     floatingBits = floatingBits + "0"
+while(len(floatingBits) > 52):
+    floatingBits = floatingBits[:-1]
 
 print("Sign Bit: " + str(signBit))
 print("Eprime: " + ePrime)
@@ -102,5 +110,4 @@ print("F: " + floatingBits)
 
 # BUILT IN HEX CONVERTER
 final = hex(int(str(signBit) + str(ePrime) + floatingBits,2))
-
 print("Hex: " + final)
