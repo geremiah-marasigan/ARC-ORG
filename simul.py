@@ -66,6 +66,8 @@ while True:
 print("Input is " + binary_input + " x 2^" + str(exp))        
 
 stdBin = standardizeBin(binary_input)
+if len(stdBin) > len(binary_input):
+    stdBin = stdBin[:len(binary_input)]
 print("Standardized Input is " + stdBin + " x 2^" + str(stdexp))
 
 # CONSIDER SPECIAL CASES
