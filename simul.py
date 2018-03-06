@@ -10,6 +10,7 @@ signBit = 0
 # CHECK IF VALID BINARY INPUT #
 def bin_check(inp):
     global signBit
+    signBit = 0
     if(inp.count(".") > 1 or inp.count("-") > 1 or ("-" in inp and inp[0] is not "-")):
         return False
     
