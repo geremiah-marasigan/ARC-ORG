@@ -73,8 +73,12 @@ print("Input is " + binary_input + " x 2^" + str(exp))
 
 
 stdBin = standardizeBin(binary_input)
+
+# CUT
 if len(stdBin) > len(binary_input):
     stdBin = stdBin[:len(binary_input)]
+
+
 print("Standardized Input is " + stdBin + " x 2^" + str(stdexp))
 
 # CONSIDER SPECIAL CASES
@@ -113,6 +117,9 @@ while(len(floatingBits) < 52):
 while(len(floatingBits) > 52):
     floatingBits = floatingBits[:-1]
 
+# CUTS FLOATING
+#floatingBits = floatingBits[:52]
+    
 print("Sign Bit: " + str(signBit))
 print("Eprime: " + ePrime)
 print("F: " + floatingBits)
