@@ -136,14 +136,18 @@ elif stdexp < -1022:
         stdBin = str(float(stdBin) / 10)
         '''
         # STRING
-        binput = list(binput)
-        point = binput.index(".")
+        stdBin = list(stdBin)
+        point = stdBin.index(".")
+        
+        if point is 0:
+            stdBin = ["0"] + stdBin
+            point = 1
         switch = point - 1
-        temp = binput[switch]
-        binput[switch] = "."
-        binput[point] = temp
-        binput = "".join(binput)
-        print(binput)
+        temp = stdBin[switch]
+        stdBin[switch] = "."
+        stdBin[point] = temp
+        stdBin = "".join(stdBin)
+        print(stdBin)
         stdexp += 1
     if signBit is 0:
         floatingBits = stdBin[2:]
