@@ -125,5 +125,8 @@ print("Eprime: " + ePrime)
 print("F: " + floatingBits)
 
 # BUILT IN HEX CONVERTER
-final = hex(int(str(signBit) + str(ePrime) + floatingBits,2))
+convertedHex = hex(int(str(signBit) + str(ePrime) + floatingBits,2))
+padding = convertedHex.split('x')
+paddedHex = padding[1].zfill(16)
+final = '0x' + paddedHex
 print("Hex: " + final)
