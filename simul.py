@@ -110,13 +110,11 @@ if binary_input.count(".") is 0:
 
 print("Input is " + binary_input + " x 2^" + str(exp))        
 
-
 stdBin = standardizeBin(binary_input)
 
 # CUT
 if len(stdBin) > len(binary_input):
     stdBin = stdBin[:len(binary_input)]
-
 
 print("Standardized Input is " + stdBin + " x 2^" + str(stdexp))
 
@@ -133,7 +131,19 @@ elif stdexp > 1023 and "0" not in stdBin:
 elif stdexp < -1022:
     ePrime = 0
     while stdexp < -1022:
+        # FLOAT
+        '''
         stdBin = str(float(stdBin) / 10)
+        '''
+        # STRING
+        binput = list(binput)
+        point = binput.index(".")
+        switch = point - 1
+        temp = binput[switch]
+        binput[switch] = "."
+        binput[point] = temp
+        binput = "".join(binput)
+        print(binput)
         stdexp += 1
     if signBit is 0:
         floatingBits = stdBin[2:]
