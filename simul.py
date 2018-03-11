@@ -23,7 +23,9 @@ def bin_check(inp):
             return False
 
     return all(x in binaryChar for x in inp)
-    
+
+# USES FLOAT
+'''
 def standardizeBin(binput):
     global stdexp
     stdexp = exp
@@ -45,6 +47,44 @@ def standardizeBin(binput):
         # MOVES FLOATING POINT TO THE LEFT, ADDS EXPONENT
         else:
             binput = str(float(binput) / 10)
+            print(binput)
+            stdexp = stdexp+1
+'''
+
+# USES STRING
+def standardizeBin(binput):
+    global stdexp
+    stdexp = exp
+    
+    first = 0
+    if signBit is 1:
+        first = 1
+    
+    while True:
+        if binput[first] is "1" and binput[first+1] is ".":
+            return binput
+        elif "1" not in binput:
+            return "0.0"
+        # MOVES FLOATING POINT TO THE RIGHT, SUBTRACTS EXPONENT
+        elif binput[first] is "0":
+            binput = list(binput)
+            point = binput.index(".")
+            switch = point + 1
+            temp = binput[switch]
+            binput[switch] = "."
+            binput[point] = temp
+            binput = "".join(binput)
+            print(binput)
+            stdexp = stdexp-1
+        # MOVES FLOATING POINT TO THE LEFT, ADDS EXPONENT
+        else:
+            binput = list(binput)
+            point = binput.index(".")
+            switch = point - 1
+            temp = binput[switch]
+            binput[switch] = "."
+            binput[point] = temp
+            binput = "".join(binput)
             print(binput)
             stdexp = stdexp+1
 
@@ -69,7 +109,6 @@ if binary_input.count(".") is 0:
     binary_input += ".0"
 
 print("Input is " + binary_input + " x 2^" + str(exp))        
-
 
 
 stdBin = standardizeBin(binary_input)
