@@ -61,7 +61,10 @@ def standardizeBin(binput):
         first = 1
     
     while True:
-        if binput[first] is "1" and binput[first+1] is ".":
+        one = binput.find("1")
+        if one == len(binput) - 1:
+            binput += "0"
+        if binput[one + 1] is ".":
             return binput
         elif "1" not in binput:
             return "0.0"
@@ -124,7 +127,7 @@ if "1" not in stdBin:
     ePrime = 0
     floatingBits = "0"
 # CASE: INFINITY
-elif stdexp > 1023 and "0" not in stdBin:
+elif stdexp > 1023:
     ePrime = 2047
     floatingBits = "0"
 # CASE: DENORMALIZED
@@ -149,17 +152,11 @@ elif stdexp < -1022:
         stdBin = "".join(stdBin)
         print(stdBin)
         stdexp += 1
-    if signBit is 0:
-        floatingBits = stdBin[2:]
-    else:
-        floatingBits = stdBin[3:]
+        floatingBits = stdBin[stdBin.find(".")+1:]
 # NORMAL CASE
 else:
     ePrime = stdexp + 1023
-    if signBit is 0:
-        floatingBits = stdBin[2:]
-    else:
-        floatingBits = stdBin[3:]
+    floatingBits = stdBin[stdBin.find(".")+1:]
 
 # CONVERTS E-PRIME TO A 11 DIGIT BINARY STRING
 ePrime = "{0:011b}".format(ePrime)
@@ -170,9 +167,6 @@ while(len(floatingBits) < 52):
 while(len(floatingBits) > 52):
     floatingBits = floatingBits[:-1]
 
-# CUTS FLOATING
-#floatingBits = floatingBits[:52]
-    
 print("Sign Bit: " + str(signBit))
 print("Eprime: " + ePrime)
 print("F: " + floatingBits)
