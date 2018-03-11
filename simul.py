@@ -44,7 +44,7 @@ def standardizeBin(binput):
             stdexp = stdexp-1
         # MOVES FLOATING POINT TO THE LEFT, ADDS EXPONENT
         else:
-            binput = str(float(binput) * 0.1)
+            binput = str(float(binput) / 10)
             print(binput)
             stdexp = stdexp+1
 
@@ -94,7 +94,7 @@ elif stdexp > 1023 and "0" not in stdBin:
 elif stdexp < -1022:
     ePrime = 0
     while stdexp < -1022:
-        stdBin = str(float(stdBin) * 0.1)
+        stdBin = str(float(stdBin) / 10)
         stdexp += 1
     if signBit is 0:
         floatingBits = stdBin[2:]
