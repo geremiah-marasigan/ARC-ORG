@@ -94,7 +94,7 @@ def standardizeBin(binput):
 # ASKS FOR BINARY INPUT, BREAKS ONLY WHEN VALID                       
 while True:
     binary_input = input("Input binary number: ")
-    if binary_input is None:
+    if binary_input is "":
         print("ERROR: PLEASE INPUT SOMETHING")
     elif bin_check(binary_input):
         break
