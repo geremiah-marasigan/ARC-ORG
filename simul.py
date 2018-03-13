@@ -13,6 +13,9 @@ def bin_check(inp):
     signBit = 0
     if(inp.count(".") > 1 or inp.count("-") > 1 or ("-" in inp and inp[0] is not "-")):
         return False
+
+    if(inp[0] is "0" and inp[1] is not '.'):
+        return False
     
     if(inp[0] is "-"):
         signBit = 1
@@ -155,6 +158,7 @@ elif stdexp < -1022:
         print(stdBin)
         stdexp += 1
         floatingBits = stdBin[stdBin.find(".")+1:]
+    print("Normalized Input is " + stdBin + " x 2^" + str(stdexp))
 # NORMAL CASE
 else:
     ePrime = stdexp + 1023
