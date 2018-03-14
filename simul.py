@@ -80,7 +80,6 @@ def standardizeBin(binput):
             binput[switch] = "."
             binput[point] = temp
             binput = "".join(binput)
-            print(binput)
             stdexp = stdexp-1
         # MOVES FLOATING POINT TO THE LEFT, ADDS EXPONENT
         else:
@@ -91,7 +90,6 @@ def standardizeBin(binput):
             binput[switch] = "."
             binput[point] = temp
             binput = "".join(binput)
-            print(binput)
             stdexp = stdexp+1
 
 # ASKS FOR BINARY INPUT, BREAKS ONLY WHEN VALID                       
@@ -138,6 +136,8 @@ elif stdexp > 1023:
 # CASE: DENORMALIZED
 elif stdexp < -1022:
     ePrime = 0
+    if (signBit is 1):
+        stdBin = stdBin[1:]
     while stdexp < -1022:
         # FLOAT
         '''
@@ -155,9 +155,12 @@ elif stdexp < -1022:
         stdBin[switch] = "."
         stdBin[point] = temp
         stdBin = "".join(stdBin)
-        print(stdBin)
+        if len(stdBin) > 200:
+            break
         stdexp += 1
         floatingBits = stdBin[stdBin.find(".")+1:]
+    if(signBit is 1):
+        stdBin = "-" + stdBin
     print("Normalized Input is " + stdBin + " x 2^" + str(stdexp))
 # NORMAL CASE
 else:
